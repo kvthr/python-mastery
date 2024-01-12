@@ -93,6 +93,10 @@ class Row():
         self.date = date
         self.daytype = daytype
         self.rides = rides
+    
+    @classmethod
+    def from_row(cls, row):
+        return cls(row[0], row[1], row[2], int(row[3]))
 
 def read_rides_as_classes(filename):
     '''
