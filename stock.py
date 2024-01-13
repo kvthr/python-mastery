@@ -2,6 +2,8 @@ import csv
 from validate import PositiveInteger, PositiveFloat, String
 
 class Stock():
+    _types = (str, int, float)
+
     name   = String()
     shares = PositiveInteger()
     price  = PositiveFloat()
@@ -10,6 +12,11 @@ class Stock():
         self.name = name
         self.shares = shares
         self.price = price
+
+    def __setattr__(self, name, value):
+        if name not in { 'name', 'shares', 'price', '_name', '_shares', '_price'}:
+            raise AttributeError('No attribute %s' % name)
+        super().__setattr__(name, value)
 
     @classmethod
     def from_row(cls, row):
