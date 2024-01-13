@@ -1,8 +1,10 @@
 import csv
+from validate import PositiveInteger, PositiveFloat, String
 
 class Stock():
-    _types = (str, int, float)
-    __slots__ = ("name", "_shares", "_price")
+    name   = String()
+    shares = PositiveInteger()
+    price  = PositiveFloat()
 
     def __init__(self, name, shares, price) -> None:
         self.name = name
@@ -20,13 +22,7 @@ class Stock():
 
     @shares.setter
     def shares(self, value):
-        if not isinstance(value, self._types[1]):
-            raise TypeError(f"Expected {self._types[1].__name__} for Shares")
-
-        if value < 0:
-            raise ValueError("Number of shares must be positive")
-        
-        self._shares = value
+        self._shares = PositiveInteger.check(value)
 
     @property
     def price(self):
