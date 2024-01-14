@@ -11,7 +11,7 @@ def read_csv_as_dicts(filename: str, types: list, *, headers=None) -> list:
     with open(filename) as file:
         return csv_as_dicts(file, types, headers=headers)
 
-def read_csv_as_instances(filename: str, cls) -> list:
+def read_csv_as_instances(filename: str, cls, *, headers=None) -> list:
     '''
     Read CSV data into a list of instances
     '''
