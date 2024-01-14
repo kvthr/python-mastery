@@ -50,13 +50,20 @@ class Structure(metaclass=StructureMeta):
         return cls(*rowdata)
 
     def __repr__(self):
-        return f"{type(self).__name__}({','.join(repr(getattr(self, name)) for name in self._fields)})"
+        return f"{type(self).__name__}({', '.join(repr(getattr(self, name)) for name in self._fields)})"
 
     def __setattr__(self, name, value):
         if name.startswith('_') or name in self._fields:
            super().__setattr__(name, value)
         else:
             raise AttributeError(f"No attribute - {name}")
+    
+    def __iter__(self):
+        for name in self._fields:
+            yield getattr(self, name)
+
+    def __eq__(self, other):
+        return isinstance(other, type(self)) and tuple(self) == tuple(other)
 
 def typed_structure(clsname, **validators):
     cls = type(clsname, (Structure,), validators)
