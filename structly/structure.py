@@ -1,7 +1,9 @@
 from collections import ChainMap
 import inspect
 import sys
-from validate import Validator, validated
+from .validate import Validator, validated
+
+__all__ = ['Structure']
 
 class StructureMeta(type):
     @classmethod

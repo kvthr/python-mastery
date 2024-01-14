@@ -1,6 +1,8 @@
 import csv
 import logging
 
+__all__ = ['read_csv_as_dicts', 'read_csv_as_instances']
+
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
